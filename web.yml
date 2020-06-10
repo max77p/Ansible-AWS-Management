@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  connection: local
+  gather_facts: yes
+
+  tasks:
+  - debug:
+      var: target_service
+  - name: create index.html file
+    file:
+      name: "{{target_service}}"
+      state: touch
+    register: task_debug
+  - debug:
+      msg: "output of is {{task_debug}}" 
